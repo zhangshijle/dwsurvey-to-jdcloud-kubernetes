@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: myserver
+  name: myserver-dwsurvey-slb
+  labels:
+    k8s-app: myserver-dwsurvey-slb
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 31080
+  type: LoadBalancer
+  selector:
+    app: myserver-dwsurvey-selector
+    project: myserver

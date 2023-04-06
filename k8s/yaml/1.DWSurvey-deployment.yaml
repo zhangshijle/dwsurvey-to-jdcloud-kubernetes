@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: myserver-dwsurvey-deployment-label
+  name: myserver-dwsurvey-deployment
+  namespace: myserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myserver-dwsurvey-selector
+  template:
+    metadata:
+      labels:
+        app: myserver-dwsurvey-selector
+        project: myserver
+    spec:
+      containers:
+      - name: myserver-dwsurvey-container
+        image: myserver-cn-north-1.jcr.service.jdcloud.com/myserver/dwsurvey:v1 
+        imagePullPolicy: IfNotPresent
+        #imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+          name: http
+      imagePullSecrets:
+      - name: jcr-pull-secret

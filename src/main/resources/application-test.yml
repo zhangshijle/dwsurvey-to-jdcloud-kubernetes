@@ -1,0 +1,100 @@
+dwsurvey:
+  site: 'local'
+  web:
+    file-path: diaowen/file/
+    static-type: static
+    site-url: http://localhost:8080
+    resource-url: http://localhost:8080
+    #    site-url: http://ent82.surveyform.cn
+    info:
+      site-name: 调问网
+      site-url: http://www.diaowen.net
+      site-icp: 京ICP备13050030号-3
+      site-mail: service@diaowen.net
+      site-phone: 18888888888
+  weixin:
+    app-id: xxx
+    app-secret: xxx
+    server:
+      token: xxx
+      encodingAESKey:
+  version:
+    info: DWSurvey OSS V5.2.5 Boot
+    number: OSS V5.2.5
+    built: 2021/11/21
+server:
+  port: 8080
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${dwsurvey.web.file-path}
+  #       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/public/,file:${dwsurvey.web.file-path}
+
+  datasource:
+    #type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/dwsurvey_21test?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456,.
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 100
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      remove-abandoned-timeout-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      stat-view-servlet:
+        enabled: false
+        reset-enable: false
+        #         访问黑名单
+        deny: 192.168.0.3
+        #          白名单
+        allow: 'localhost'
+        url-pattern: /druid/*
+        # 上生产环境一定要改账号与密码！
+        login-username: admin
+        login-password: dwsdb123456
+  jpa:
+    database: mysql
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      # naming:
+      #  implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl #指定jpa的自动表生成策略，驼峰自动映射为下划线格式
+    properties:
+      hibernate:
+        #是否自动打印hql对应的sql语句
+        show_sql: false
+        #是否格式化sql语句
+        format_sql: false
+        #事务交由spring管理
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        #        enable_lazy_load_no_trans: true
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+  main:
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+logging:
+  level:
+    net:
+      diaowen: INFO
+    org:
+      hibernate: ERROR
+      apache: ERROR
