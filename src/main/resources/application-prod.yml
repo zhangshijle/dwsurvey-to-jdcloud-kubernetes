@@ -37,8 +37,8 @@ spring:
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://mysql-cn-north-1-9cfa743ab2154809.rds.jdcloud.com:3306/dwsurvey?useUnicode=true&characterEncoding=utf8
-    username: DWSurvey
-    password: DWSurvey123456
+    username: USERNAME
+    password: PASSWORD
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 5
