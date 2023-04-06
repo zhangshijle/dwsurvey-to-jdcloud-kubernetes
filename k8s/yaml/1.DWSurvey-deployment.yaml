@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: myserver-dwsurvey-container
-        image: myserver-cn-north-1.jcr.service.jdcloud.com/myserver/dwsurvey:v1 
+        image: NAME-cn-north-1.jcr.service.jdcloud.com/myserver/dwsurvey:v1 
         imagePullPolicy: IfNotPresent
         #imagePullPolicy: Always
         ports:
